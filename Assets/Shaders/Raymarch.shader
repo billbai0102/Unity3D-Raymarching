@@ -1,8 +1,4 @@
-﻿// Upgrade NOTE: replaced '_CameraToWorld' with 'unity_CameraToWorld'
-
-// Upgrade NOTE: replaced '_CameraToWorld' with 'unity_CameraToWorld'
-
-Shader "B4I/Raymarch"
+﻿Shader "Bai/Raymarch"
 {
     Properties
     {
@@ -24,7 +20,8 @@ Shader "B4I/Raymarch"
 
             sampler2D _MainTex;
             uniform float4 _CameraWorldSpace;
-            uniform float4x4 _CameraFrustum, _CamToWorld;
+            uniform float4x4 _CameraFrustum;
+            uniform float4x4 _CamToWorld;
 
             struct appdata
             {
@@ -36,19 +33,23 @@ Shader "B4I/Raymarch"
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+
                 float3 ray: TEXCOORD1;
             };
 
             v2f vert (appdata v)
             {
                 v2f o;
+
                 half index = v.vertex.z;
                 v.vertex.z = 0;
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
 
                 o.ray = _CameraFrustum[(int)index].xyz;
                 o.ray /= abs(o.ray.z);
+
                 o.ray = mul(_CamToWorld, o.ray);
 
                 return o;

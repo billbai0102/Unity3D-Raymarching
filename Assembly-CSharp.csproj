@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\RaymarchCam.cs" />
+     <Compile Include="Assets\Scripts\RaymarchScript.cs" />
      <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
      <None Include="Assets\Shaders\Raymarch.shader" />
  <Reference Include="Unity.RenderPipelines.Core.Editor">
